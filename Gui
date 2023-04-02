@@ -1,0 +1,1051 @@
+local ScreenGui = Instance.new("ScreenGui")
+
+local GangUpGUI = Instance.new("Frame")
+
+local GangUpOnPeopleSimulator = Instance.new("TextLabel")
+
+local Hitbox = Instance.new("TextButton")
+
+local VisualGUI = Instance.new("TextButton")
+
+local MadeByMe = Instance.new("TextLabel")
+
+local Redbull = Instance.new("TextButton")
+
+local Btools = Instance.new("TextButton")
+
+local GunShop = Instance.new("TextButton")
+
+local Main = Instance.new("TextLabel")
+
+local Teleportation = Instance.new("TextLabel")
+
+local Pistol = Instance.new("TextButton")
+
+local IceCreamShop = Instance.new("TextButton")
+
+local PizzaPlace = Instance.new("TextButton")
+
+local Grocery = Instance.new("TextButton")
+
+local Club = Instance.new("TextButton")
+
+local Graveyard = Instance.new("TextButton")
+
+local MafiaHideout = Instance.new("TextButton")
+
+local Cloud = Instance.new("TextButton")
+
+local OtherShop = Instance.new("TextButton")
+
+ 
+
+--Properties:
+
+ 
+
+ScreenGui.Parent = game.CoreGui
+
+ 
+
+GangUpGUI.Name = "Gang Up GUI"
+
+GangUpGUI.Parent = ScreenGui
+
+GangUpGUI.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+
+GangUpGUI.Position = UDim2.new(0.413837522, 0, 0.261627883, 0)
+
+GangUpGUI.Size = UDim2.new(0, 445, 0, 594)
+
+GangUpGUI.Active = true
+
+GangUpGUI.Draggable = true
+
+ 
+
+GangUpOnPeopleSimulator.Name = "Gang Up On People Simulator"
+
+GangUpOnPeopleSimulator.Parent = GangUpGUI
+
+GangUpOnPeopleSimulator.BackgroundColor3 = Color3.fromRGB(75, 147, 255)
+
+GangUpOnPeopleSimulator.Size = UDim2.new(0, 445, 0, 50)
+
+GangUpOnPeopleSimulator.Font = Enum.Font.SourceSans
+
+GangUpOnPeopleSimulator.Text = "Gang Up On People Simulator GUI"
+
+GangUpOnPeopleSimulator.TextColor3 = Color3.fromRGB(0, 0, 0)
+
+GangUpOnPeopleSimulator.TextSize = 14.000
+
+ 
+
+Hitbox.Name = "Hitbox"
+
+Hitbox.Parent = GangUpGUI
+
+Hitbox.BackgroundColor3 = Color3.fromRGB(255, 0, 4)
+
+Hitbox.Position = UDim2.new(0.0359550565, 0, 0.181359485, 0)
+
+Hitbox.Size = UDim2.new(0, 200, 0, 34)
+
+Hitbox.Font = Enum.Font.SourceSans
+
+Hitbox.Text = "Hit Box"
+
+Hitbox.TextColor3 = Color3.fromRGB(0, 0, 0)
+
+Hitbox.TextSize = 14.000
+
+Hitbox.MouseButton1Down:connect(function()
+
+    _G.HeadSize = 7
+
+ 
+
+    _G.Disabled = true
+
+ 
+
+    game:GetService('RunService').RenderStepped:connect(function()
+
+        if _G.Disabled then
+
+            for i,v in next, game:GetService('Players'):GetPlayers() do
+
+                if v.Name ~= game:GetService('Players').LocalPlayer.Name then
+
+                    pcall(function()
+
+                        v.Character.HumanoidRootPart.Size = Vector3.new(_G.HeadSize,_G.HeadSize,_G.HeadSize)
+
+                        v.Character.HumanoidRootPart.Transparency = 0.7
+
+                        v.Character.HumanoidRootPart.BrickColor = BrickColor.new("Really black")
+
+                        v.Character.HumanoidRootPart.Material = "Neon"
+
+                        v.Character.HumanoidRootPart.CanCollide = false
+
+                    end)
+
+                end
+
+            end
+
+        end
+
+    end)
+
+end)
+
+ 
+
+VisualGUI.Name = "Visual GUI"
+
+VisualGUI.Parent = GangUpGUI
+
+VisualGUI.BackgroundColor3 = Color3.fromRGB(114, 241, 255)
+
+VisualGUI.Position = UDim2.new(0.516853929, 0, 0.183042943, 0)
+
+VisualGUI.Size = UDim2.new(0, 200, 0, 34)
+
+VisualGUI.Font = Enum.Font.SourceSans
+
+VisualGUI.Text = "ESP, TRACER, CHAMS, ETC"
+
+VisualGUI.TextColor3 = Color3.fromRGB(0, 0, 0)
+
+VisualGUI.TextSize = 14.000
+
+VisualGUI.MouseButton1Down:connect(function()
+
+    loadstring(game:HttpGet("https://pastebin.com/raw/uw2P2fbY", true))()
+
+ 
+
+    PLAYER  = game.Players.LocalPlayer
+
+    MOUSE   = PLAYER:GetMouse()
+
+    CC      = game.Workspace.CurrentCamera
+
+ 
+
+    ENABLED      = false
+
+    ESP_ENABLED  = false
+
+ 
+
+    _G.FREE_FOR_ALL = false
+
+ 
+
+    _G.BIND        = 118
+
+    _G.ESP_BIND    = 49
+
+    _G.CHANGE_AIM  = 'q'
+
+ 
+
+    _G.AIM_AT = 'Head'
+
+ 
+
+    wait(1)
+
+ 
+
+    function GetNearestPlayerToMouse()
+
+        local PLAYERS      = {}
+
+        local PLAYER_HOLD  = {}
+
+        local DISTANCES    = {}
+
+        for i, v in pairs(game.Players:GetPlayers()) do
+
+            if v ~= PLAYER then
+
+                table.insert(PLAYERS, v)
+
+            end
+
+        end
+
+        for i, v in pairs(PLAYERS) do
+
+            if _G.FREE_FOR_ALL == false then
+
+                if v and (v.Character) ~= nil and v.TeamColor ~= PLAYER.TeamColor then
+
+                    local AIM = v.Character:FindFirstChild(_G.AIM_AT)
+
+                    if AIM ~= nil then
+
+                        local DISTANCE                 = (AIM.Position - game.Workspace.CurrentCamera.CoordinateFrame.p).magnitude
+
+                        local RAY                      = Ray.new(game.Workspace.CurrentCamera.CoordinateFrame.p, (MOUSE.Hit.p - CC.CoordinateFrame.p).unit * DISTANCE)
+
+                        local HIT,POS                  = game.Workspace:FindPartOnRay(RAY, game.Workspace)
+
+                        local DIFF                     = math.floor((POS - AIM.Position).magnitude)
+
+                        PLAYER_HOLD[v.Name .. i]       = {}
+
+                        PLAYER_HOLD[v.Name .. i].dist  = DISTANCE
+
+                        PLAYER_HOLD[v.Name .. i].plr   = v
+
+                        PLAYER_HOLD[v.Name .. i].diff  = DIFF
+
+                        table.insert(DISTANCES, DIFF)
+
+                    end
+
+                end
+
+            elseif _G.FREE_FOR_ALL == true then
+
+                local AIM = v.Character:FindFirstChild(_G.AIM_AT)
+
+                if AIM ~= nil then
+
+                    local DISTANCE                 = (AIM.Position - game.Workspace.CurrentCamera.CoordinateFrame.p).magnitude
+
+                    local RAY                      = Ray.new(game.Workspace.CurrentCamera.CoordinateFrame.p, (MOUSE.Hit.p - CC.CoordinateFrame.p).unit * DISTANCE)
+
+                    local HIT,POS                  = game.Workspace:FindPartOnRay(RAY, game.Workspace)
+
+                    local DIFF                     = math.floor((POS - AIM.Position).magnitude)
+
+                    PLAYER_HOLD[v.Name .. i]       = {}
+
+                    PLAYER_HOLD[v.Name .. i].dist  = DISTANCE
+
+                    PLAYER_HOLD[v.Name .. i].plr   = v
+
+                    PLAYER_HOLD[v.Name .. i].diff  = DIFF
+
+                    table.insert(DISTANCES, DIFF)
+
+                end
+
+            end
+
+        end
+
+ 
+
+        if unpack(DISTANCES) == nil then
+
+            return false
+
+        end
+
+ 
+
+        local L_DISTANCE = math.floor(math.min(unpack(DISTANCES)))
+
+        if L_DISTANCE > 20 then
+
+            return false
+
+        end
+
+ 
+
+        for i, v in pairs(PLAYER_HOLD) do
+
+            if v.diff == L_DISTANCE then
+
+                return v.plr
+
+            end
+
+        end
+
+        return false
+
+    end
+
+ 
+
+    GUI_MAIN                           = Instance.new('ScreenGui', game.CoreGui)
+
+    GUI_TARGET                         = Instance.new('TextLabel', GUI_MAIN)
+
+    GUI_AIM_AT                         = Instance.new('TextLabel', GUI_MAIN)
+
+ 
+
+    GUI_MAIN.Name                      = 'AIMBOT'
+
+ 
+
+    GUI_TARGET.Size                    = UDim2.new(0,200,0,30)
+
+    GUI_TARGET.BackgroundTransparency  = 0.5
+
+    GUI_TARGET.BackgroundColor         = BrickColor.new('Fossil')
+
+    GUI_TARGET.BorderSizePixel         = 0
+
+    GUI_TARGET.Position                = UDim2.new(0.5,-100,0,0)
+
+    GUI_TARGET.Text                    = 'AIMBOT : OFF'
+
+    GUI_TARGET.TextColor3              = Color3.new(1,1,1)
+
+    GUI_TARGET.TextStrokeTransparency  = 1
+
+    GUI_TARGET.TextWrapped             = true
+
+    GUI_TARGET.FontSize                = 'Size24'
+
+    GUI_TARGET.Font                    = 'SourceSansBold'
+
+ 
+
+    GUI_AIM_AT.Size                    = UDim2.new(0,200,0,20)
+
+    GUI_AIM_AT.BackgroundTransparency  = 0.5
+
+    GUI_AIM_AT.BackgroundColor         = BrickColor.new('Fossil')
+
+    GUI_AIM_AT.BorderSizePixel         = 0
+
+    GUI_AIM_AT.Position                = UDim2.new(0.5,-100,0,30)
+
+    GUI_AIM_AT.Text                    = 'AIMING : HEAD'
+
+    GUI_AIM_AT.TextColor3              = Color3.new(1,1,1)
+
+    GUI_AIM_AT.TextStrokeTransparency  = 1
+
+    GUI_AIM_AT.TextWrapped             = true
+
+    GUI_AIM_AT.FontSize                = 'Size18'
+
+    GUI_AIM_AT.Font                    = 'SourceSansBold'
+
+ 
+
+    local TRACK = false
+
+ 
+
+    function CREATE(BASE, TEAM)
+
+        local ESP_MAIN                   = Instance.new('BillboardGui', PLAYER.PlayerGui)
+
+        local ESP_DOT                    = Instance.new('Frame', ESP_MAIN)
+
+        local ESP_NAME                   = Instance.new('TextLabel', ESP_MAIN)
+
+ 
+
+        ESP_MAIN.Name                    = 'ESP'
+
+        ESP_MAIN.Adornee                 = BASE
+
+        ESP_MAIN.AlwaysOnTop             = true
+
+        ESP_MAIN.ExtentsOffset           = Vector3.new(0, 1, 0)
+
+        ESP_MAIN.Size                    = UDim2.new(0, 5, 0, 5)
+
+ 
+
+        ESP_DOT.Name                     = 'DOT'
+
+        ESP_DOT.BackgroundColor          = BrickColor.new('Bright red')
+
+        ESP_DOT.BackgroundTransparency   = 0.3
+
+        ESP_DOT.BorderSizePixel          = 0
+
+        ESP_DOT.Position                 = UDim2.new(-0.5, 0, -0.5, 0)
+
+        ESP_DOT.Size                     = UDim2.new(2, 0, 2, 0)
+
+        ESP_DOT.Visible                  = true
+
+        ESP_DOT.ZIndex                   = 10
+
+ 
+
+        ESP_NAME.Name                    = 'NAME'
+
+        ESP_NAME.BackgroundColor3        = Color3.new(255, 255, 255)
+
+        ESP_NAME.BackgroundTransparency  = 1
+
+        ESP_NAME.BorderSizePixel         = 0
+
+        ESP_NAME.Position                = UDim2.new(0, 0, 0, -40)
+
+        ESP_NAME.Size                    = UDim2.new(1, 0, 10, 0)
+
+        ESP_NAME.Visible                 = true
+
+        ESP_NAME.ZIndex                  = 10
+
+        ESP_NAME.Font                    = 'ArialBold'
+
+        ESP_NAME.FontSize                = 'Size14'
+
+        ESP_NAME.Text                    = BASE.Parent.Name:upper()
+
+        ESP_NAME.TextColor               = BrickColor.new('Bright red')
+
+    end
+
+ 
+
+    function CLEAR()
+
+        for _,v in pairs(PLAYER.PlayerGui:children()) do
+
+            if v.Name == 'ESP' and v:IsA('BillboardGui') then
+
+                v:Destroy()
+
+            end
+
+        end
+
+    end
+
+ 
+
+    function FIND()
+
+        CLEAR()
+
+        TRACK = true
+
+        spawn(function()
+
+            while wait() do
+
+                if TRACK then
+
+                    CLEAR()
+
+                    for i,v in pairs(game.Players:GetChildren()) do
+
+                        if v.Character and v.Character:FindFirstChild('Head') then
+
+                            if _G.FREE_FOR_ALL == false then
+
+                                if v.TeamColor ~= PLAYER.TeamColor then
+
+                                    if v.Character:FindFirstChild('Head') then
+
+                                        CREATE(v.Character.Head, true)
+
+                                    end
+
+                                end
+
+                            else
+
+                                if v.Character:FindFirstChild('Head') then
+
+                                    CREATE(v.Character.Head, true)
+
+                                end
+
+                            end
+
+                        end
+
+                    end
+
+                end
+
+            end
+
+            wait(1)
+
+        end)
+
+    end
+
+ 
+
+    MOUSE.KeyDown:connect(function(KEY)
+
+        KEY = KEY:lower():byte()
+
+        if KEY == _G.BIND then
+
+            ENABLED = true
+
+        end
+
+    end)
+
+ 
+
+    MOUSE.KeyUp:connect(function(KEY)
+
+        KEY = KEY:lower():byte()
+
+        if KEY == _G.BIND then
+
+            ENABLED = false
+
+        end
+
+    end)
+
+ 
+
+    MOUSE.KeyDown:connect(function(KEY)
+
+        KEY = KEY:lower():byte()
+
+        if KEY == _G.ESP_BIND then
+
+            if ESP_ENABLED == false then
+
+                FIND()
+
+                ESP_ENABLED = true
+
+                print('ESP : ON')
+
+            elseif ESP_ENABLED == true then
+
+                wait()
+
+                CLEAR()
+
+                TRACK = false
+
+                ESP_ENABLED = true
+
+                print('ESP : OFF')
+
+            end
+
+        end
+
+    end)
+
+ 
+
+    MOUSE.KeyDown:connect(function(KEY)
+
+        if KEY == _G.CHANGE_AIM then
+
+            if _G.AIM_AT == 'Head' then
+
+                _G.AIM_AT = 'Torso'
+
+                GUI_AIM_AT.Text = 'AIMING : TORSO'
+
+            elseif _G.AIM_AT == 'Torso' then
+
+                _G.AIM_AT = 'Head'
+
+                GUI_AIM_AT.Text = 'AIMING : HEAD'
+
+            end
+
+        end
+
+    end)
+
+ 
+
+    game:GetService('RunService').RenderStepped:connect(function()
+
+        if ENABLED then
+
+            local TARGET = GetNearestPlayerToMouse()
+
+            if (TARGET ~= false) then
+
+                local AIM = TARGET.Character:FindFirstChild(_G.AIM_AT)
+
+                if AIM then
+
+                    CC.CoordinateFrame = CFrame.new(CC.CoordinateFrame.p, AIM.CFrame.p)
+
+                end
+
+                GUI_TARGET.Text = 'AIMBOT : '.. TARGET.Name:sub(1, 5)
+
+            else
+
+                GUI_TARGET.Text = 'AIMBOT : OFF'
+
+            end
+
+        end
+
+    end)
+
+ 
+
+    repeat
+
+        wait()
+
+        if ESP_ENABLED == true then
+
+            FIND()
+
+        end
+
+    until ESP_ENABLED == false
+
+    wait()
+
+    _G.FREE_FOR_ALL = false
+
+    _G.BIND = 118 -- LEFT ALT
+
+    _G.ESP_BIND = 49 -- RIGHT CTRL
+
+end)
+
+ 
+
+MadeByMe.Name = "Made By Me"
+
+MadeByMe.Parent = GangUpGUI
+
+MadeByMe.BackgroundColor3 = Color3.fromRGB(189, 21, 255)
+
+MadeByMe.Position = UDim2.new(0.0359550565, 0, 0.927115977, 0)
+
+MadeByMe.Size = UDim2.new(0, 414, 0, 26)
+
+MadeByMe.Font = Enum.Font.SourceSans
+
+MadeByMe.Text = "GUI Made By Billy Novaldo Setiawan"
+
+MadeByMe.TextColor3 = Color3.fromRGB(0, 0, 0)
+
+MadeByMe.TextSize = 14.000
+
+ 
+
+Redbull.Name = "Redbull"
+
+Redbull.Parent = GangUpGUI
+
+Redbull.BackgroundColor3 = Color3.fromRGB(246, 255, 70)
+
+Redbull.Position = UDim2.new(0.0359550565, 0, 0.255158693, 0)
+
+Redbull.Size = UDim2.new(0, 200, 0, 34)
+
+Redbull.Font = Enum.Font.SourceSans
+
+Redbull.Text = "Free Redbull Cola"
+
+Redbull.TextColor3 = Color3.fromRGB(0, 0, 0)
+
+Redbull.TextSize = 14.000
+
+Redbull.MouseButton1Down:connect(function()
+
+    mouse = game.Players.LocalPlayer:GetMouse()
+
+    tool = Instance.new("Tool")
+
+    tool.RequiresHandle = false
+
+    tool.Name = "Fake Redbull"
+
+    tool.Activated:connect(function()
+
+        game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 70
+
+    end)
+
+    tool.Parent = game.Players.LocalPlayer.Backpack
+
+ 
+
+end)
+
+ 
+
+Btools.Name = "Btools"
+
+Btools.Parent = GangUpGUI
+
+Btools.BackgroundColor3 = Color3.fromRGB(129, 129, 129)
+
+Btools.Position = UDim2.new(0.516853929, 0, 0.255158693, 0)
+
+Btools.Size = UDim2.new(0, 200, 0, 34)
+
+Btools.Font = Enum.Font.SourceSans
+
+Btools.Text = "Btool"
+
+Btools.TextColor3 = Color3.fromRGB(0, 0, 0)
+
+Btools.TextSize = 14.000
+
+Btools.MouseButton1Down:connect(function()
+
+    local tool1   = Instance.new("HopperBin",game.Players.LocalPlayer.Backpack)
+
+    tool1.BinType = "Hammer"
+
+end)
+
+ 
+
+GunShop.Name = "Gun Shop"
+
+GunShop.Parent = GangUpGUI
+
+GunShop.BackgroundColor3 = Color3.fromRGB(180, 144, 101)
+
+GunShop.Position = UDim2.new(0.0359550565, 0, 0.470395386, 0)
+
+GunShop.Size = UDim2.new(0, 200, 0, 34)
+
+GunShop.Font = Enum.Font.SourceSans
+
+GunShop.Text = "Gun Shop"
+
+GunShop.TextColor3 = Color3.fromRGB(0, 0, 0)
+
+GunShop.TextSize = 14.000
+
+GunShop.MouseButton1Down:connect(function()
+
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-134.491119, 3.7499969, 114.721298, 8.2395045e-06, -5.55764608e-08, -1, 6.13218702e-08, 1, -5.55759563e-08, 1, -6.13214155e-08, 8.2395045e-06)
+
+end)
+
+ 
+
+Main.Name = "Main"
+
+Main.Parent = GangUpGUI
+
+Main.BackgroundColor3 = Color3.fromRGB(123, 141, 255)
+
+Main.Position = UDim2.new(0.0359550565, 0, 0.102709696, 0)
+
+Main.Size = UDim2.new(0, 414, 0, 24)
+
+Main.Font = Enum.Font.SourceSans
+
+Main.Text = "Main"
+
+Main.TextColor3 = Color3.fromRGB(0, 0, 0)
+
+Main.TextSize = 20.000
+
+ 
+
+Teleportation.Name = "Teleportation"
+
+Teleportation.Parent = GangUpGUI
+
+Teleportation.BackgroundColor3 = Color3.fromRGB(123, 141, 255)
+
+Teleportation.Position = UDim2.new(0.035954833, 0, 0.367003381, 0)
+
+Teleportation.Size = UDim2.new(0, 414, 0, 24)
+
+Teleportation.Font = Enum.Font.SourceSans
+
+Teleportation.Text = "Teleportation"
+
+Teleportation.TextColor3 = Color3.fromRGB(0, 0, 0)
+
+Teleportation.TextSize = 20.000
+
+ 
+
+Pistol.Name = "Pistol"
+
+Pistol.Parent = GangUpGUI
+
+Pistol.BackgroundColor3 = Color3.fromRGB(180, 144, 101)
+
+Pistol.Position = UDim2.new(0.514606714, 0, 0.469696969, 0)
+
+Pistol.Size = UDim2.new(0, 200, 0, 34)
+
+Pistol.Font = Enum.Font.SourceSans
+
+Pistol.Text = "Pistol"
+
+Pistol.TextColor3 = Color3.fromRGB(0, 0, 0)
+
+Pistol.TextSize = 14.000
+
+Pistol.MouseButton1Down:connect(function()
+
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(17.5603542, 3, -48.5407524, -0.0174481831, 5.21309751e-08, 0.99984777, -2.04494572e-08, 1, -5.24957748e-08, -0.99984777, -2.13623004e-08, -0.0174481831)
+
+end)
+
+    
+
+IceCreamShop.Name = "Ice Cream Shop"
+
+IceCreamShop.Parent = GangUpGUI
+
+IceCreamShop.BackgroundColor3 = Color3.fromRGB(180, 144, 101)
+
+IceCreamShop.Position = UDim2.new(0.0359550714, 0, 0.547138035, 0)
+
+IceCreamShop.Size = UDim2.new(0, 200, 0, 34)
+
+IceCreamShop.Font = Enum.Font.SourceSans
+
+IceCreamShop.Text = "Ice Cream Shop"
+
+IceCreamShop.TextColor3 = Color3.fromRGB(0, 0, 0)
+
+IceCreamShop.TextSize = 14.000
+
+IceCreamShop.MouseButton1Down:connect(function()
+
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-46.1590538, 3.1741209, -24.9109554, 0.999847651, 2.13850697e-08, -0.0174542367, -2.18524985e-08, 1, -2.6589575e-08, 0.0174542367, 2.69669425e-08, 0.999847651)
+
+end)
+
+        
+
+PizzaPlace.Name = "Pizza Place"
+
+PizzaPlace.Parent = GangUpGUI
+
+PizzaPlace.BackgroundColor3 = Color3.fromRGB(180, 144, 101)
+
+PizzaPlace.Position = UDim2.new(0.514606714, 0, 0.547138035, 0)
+
+PizzaPlace.Size = UDim2.new(0, 200, 0, 34)
+
+PizzaPlace.Font = Enum.Font.SourceSans
+
+PizzaPlace.Text = "Pizza Place"
+
+PizzaPlace.TextColor3 = Color3.fromRGB(0, 0, 0)
+
+PizzaPlace.TextSize = 14.000
+
+PizzaPlace.MouseButton1Down:connect(function()
+
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-152.678146, 3.99999881, -25.7853718, 0.99998796, 8.25453839e-09, 0.00490789069, -7.71848452e-09, 1, -1.09241931e-07, -0.00490789069, 1.09202738e-07, 0.99998796)
+
+end)
+
+ 
+
+Grocery.Name = "Grocery"
+
+Grocery.Parent = GangUpGUI
+
+Grocery.BackgroundColor3 = Color3.fromRGB(180, 144, 101)
+
+Grocery.Position = UDim2.new(0.0359550714, 0, 0.619528592, 0)
+
+Grocery.Size = UDim2.new(0, 200, 0, 34)
+
+Grocery.Font = Enum.Font.SourceSans
+
+Grocery.Text = "Grocery"
+
+Grocery.TextColor3 = Color3.fromRGB(0, 0, 0)
+
+Grocery.TextSize = 14.000
+
+Grocery.MouseButton1Down:connect(function()
+
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-34.021637, 3.04999876, -69.6754227, 1.95964349e-05, -8.53288551e-09, 1, 4.55775868e-11, 1, 8.53288462e-09, -1, 4.54103734e-11, 1.95964349e-05)
+
+end)
+
+ 
+
+Club.Name = "Club"
+
+Club.Parent = GangUpGUI
+
+Club.BackgroundColor3 = Color3.fromRGB(169, 136, 95)
+
+Club.Position = UDim2.new(0.514606714, 0, 0.619528532, 0)
+
+Club.Size = UDim2.new(0, 200, 0, 33)
+
+Club.Font = Enum.Font.SourceSans
+
+Club.Text = "Club"
+
+Club.TextColor3 = Color3.fromRGB(0, 0, 0)
+
+Club.TextSize = 14.000
+
+Club.MouseButton1Down:connect(function()
+
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-77.0103455, 3.04999876, -139.440735, -0.999857366, 8.79562312e-10, 0.0168893952, 1.02196773e-09, 1, 8.4230134e-09, -0.0168893952, 8.43907255e-09, -0.999857366)
+
+end)
+
+ 
+
+Graveyard.Name = "Graveyard"
+
+Graveyard.Parent = GangUpGUI
+
+Graveyard.BackgroundColor3 = Color3.fromRGB(180, 144, 101)
+
+Graveyard.Position = UDim2.new(0.0359550714, 0, 0.695286214, 0)
+
+Graveyard.Size = UDim2.new(0, 200, 0, 34)
+
+Graveyard.Font = Enum.Font.SourceSans
+
+Graveyard.Text = "Graveyard"
+
+Graveyard.TextColor3 = Color3.fromRGB(0, 0, 0)
+
+Graveyard.TextSize = 14.000
+
+Graveyard.MouseButton1Down:connect(function()
+
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(76.0363693, 16.0550003, 120.941696, 0.537318289, 4.80023807e-08, 0.843379557, 6.59562431e-08, 1, -9.89375124e-08, -0.843379557, 1.08787077e-07, 0.537318289)
+
+end)
+
+ 
+
+MafiaHideout.Name = "Mafia Hideout"
+
+MafiaHideout.Parent = GangUpGUI
+
+MafiaHideout.BackgroundColor3 = Color3.fromRGB(180, 144, 101)
+
+MafiaHideout.Position = UDim2.new(0.514606714, 0, 0.695286214, 0)
+
+MafiaHideout.Size = UDim2.new(0, 200, 0, 34)
+
+MafiaHideout.Font = Enum.Font.SourceSans
+
+MafiaHideout.Text = "Mafia Hideout"
+
+MafiaHideout.TextColor3 = Color3.fromRGB(0, 0, 0)
+
+MafiaHideout.TextSize = 14.000
+
+MafiaHideout.MouseButton1Down:connect(function()
+
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-89.4542999, -49.0000114, 70.5407333, -0.999847114, -7.81250762e-08, 0.0174861364, -7.78626088e-08, 1, 1.56910342e-08, -0.0174861364, 1.4327119e-08, -0.999847114)
+
+end)    
+
+ 
+
+Cloud.Name = "Cloud"
+
+Cloud.Parent = GangUpGUI
+
+Cloud.BackgroundColor3 = Color3.fromRGB(180, 144, 101)
+
+Cloud.Position = UDim2.new(0.0359550714, 0, 0.772727311, 0)
+
+Cloud.Size = UDim2.new(0, 200, 0, 34)
+
+Cloud.Font = Enum.Font.SourceSans
+
+Cloud.Text = "Cloud"
+
+Cloud.TextColor3 = Color3.fromRGB(0, 0, 0)
+
+Cloud.TextSize = 14.000
+
+Cloud.MouseButton1Down:connect(function()
+
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-46.8666382, 432.599915, 9.82554531, -0.999389648, 1.77118924e-08, 0.0349330008, 1.61542619e-08, 1, -4.48713386e-08, -0.0349330008, -4.42796377e-08, -0.999389648)
+
+end)
+
+ 
+
+OtherShop.Name = "Other Shop"
+
+OtherShop.Parent = GangUpGUI
+
+OtherShop.BackgroundColor3 = Color3.fromRGB(180, 144, 101)
+
+OtherShop.Position = UDim2.new(0.514606714, 0, 0.772727251, 0)
+
+OtherShop.Size = UDim2.new(0, 200, 0, 34)
+
+OtherShop.Font = Enum.Font.SourceSans
+
+OtherShop.Text = "Other Shop"
+
+OtherShop.TextColor3 = Color3.fromRGB(0, 0, 0)
+
+OtherShop.TextSize = 14.000
+
+OtherShop.MouseButton1Down:connect(function()
+
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(15.0762949, 4, 117.751221, -0.0174759366, -1.01417497e-08, 0.999847293, 8.08530043e-09, 1, 1.02846185e-08, -0.999847293, 8.26379853e-09, -0.0174759366)
+
+end)
